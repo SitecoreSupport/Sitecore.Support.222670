@@ -11,13 +11,13 @@ namespace Sitecore.Support.Marketing.Search.FieldReaders
   {
     public override object GetFieldValue(IIndexableDataField indexableField)
     {
-      Field field = (Field)(indexableField as SitecoreItemDataField);
-      if ((field == null) || (field.GetValue(true, false, true, false, true) != null))
+      if (indexableField is SitecoreItemDataField sitecoreItemDataField)
       {
-        DateField field2 = FieldTypeManager.GetField(field) as DateField;
-        if (field2 != null)
+        Field field = sitecoreItemDataField.Field;
+        if (field.GetValue(true, false) != null)
         {
-          return field2.DateTime;
+          var dateField = FieldTypeManager.GetField(field) as DateField;
+          return dateField?.DateTime;
         }
       }
       return null;
