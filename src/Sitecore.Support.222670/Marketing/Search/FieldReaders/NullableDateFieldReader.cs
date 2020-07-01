@@ -11,7 +11,8 @@ namespace Sitecore.Support.Marketing.Search.FieldReaders
   {
     public override object GetFieldValue(IIndexableDataField indexableField)
     {
-      if (indexableField is SitecoreItemDataField sitecoreItemDataField)
+      var sitecoreItemDataField = indexableField as SitecoreItemDataField;
+      if (sitecoreItemDataField != null)
       {
         Field field = sitecoreItemDataField.Field;
         if (field.GetValue(true, false) != null)
